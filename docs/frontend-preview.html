@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.dataset.theme=new URLSearchParams(location.search).get('theme')||'console'</script>
+  <title>WebPilot · 界面设计预览</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0f172a;--panel:#1b2336;--raised:#263248;--line:#475569;--text:#f8fafc;--muted:#b8c5d6;--accent:#22c55e;--warn:#fbbf24;--danger:#f87171}
+    *{box-sizing:border-box}html{font-family:"IBM Plex Sans","Microsoft YaHei",sans-serif}body{margin:0;background:var(--bg);color:var(--text);font-size:16px;line-height:1.55}button,input,textarea{font:inherit}button{cursor:pointer}a{color:inherit}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid #fff;outline-offset:3px}
+    .shell{min-height:100vh;display:grid;grid-template-columns:224px minmax(0,1fr)}.nav{border-right:1px solid var(--line);padding:28px 18px;display:flex;flex-direction:column;gap:28px}.brand{font:700 21px "JetBrains Mono",monospace;letter-spacing:-.04em;padding:0 10px}.brand b{color:var(--accent)}.nav a{display:block;text-decoration:none;color:var(--muted);padding:12px 14px;border-radius:10px;margin-bottom:4px}.nav a.current{background:var(--raised);color:var(--text)}.nav a:hover{color:var(--text);background:#27364f}.nav-foot{margin-top:auto;padding:10px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+    main{max-width:1500px;width:100%;margin:auto;padding:30px clamp(20px,4vw,60px) 70px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;color:var(--muted);font-size:14px}.eyebrow{font:600 12px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.16em;color:var(--accent)}.top .env{border:1px solid var(--line);border-radius:100px;padding:7px 12px;white-space:nowrap}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--warn);margin-right:7px}.hero{padding:46px 0 30px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:30px;align-items:end}.hero h1{font-size:clamp(32px,4vw,54px);line-height:1.12;letter-spacing:-.05em;max-width:740px;margin:12px 0 16px}.hero p{color:var(--muted);margin:0;max-width:660px}.hero-note{border-left:1px solid var(--line);padding-left:20px;color:var(--muted);font-size:14px}.hero-note strong{color:var(--text);display:block;font-size:16px;margin-bottom:8px}
+    .layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(300px,.75fr);gap:22px}.panel{background:var(--panel);border:1px solid #344157;border-radius:16px;padding:26px;min-width:0}.panel h2{font-size:20px;letter-spacing:-.025em;margin:0 0 17px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.small{color:var(--muted);font-size:13px}.label{display:block;font-size:14px;font-weight:600;margin:0 0 9px}textarea{display:block;width:100%;min-height:138px;resize:vertical;border:1px solid var(--line);background:#111a2c;border-radius:10px;color:var(--text);padding:17px;line-height:1.55}textarea::placeholder{color:#91a2b7}.form-row{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-top:18px}.form-row label{font-size:13px;color:var(--muted)}.form-row input{display:block;width:80px;margin-top:7px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:#111a2c;color:var(--text)}.primary{border:0;background:var(--accent);color:#062110;border-radius:9px;font-weight:700;padding:12px 18px;min-height:44px}.primary:hover{background:#4ade80}.secondary{border:1px solid var(--line);background:transparent;color:var(--text);border-radius:9px;padding:9px 14px;min-height:44px}.secondary:hover{background:var(--raised)}.tip{margin-top:18px;color:var(--muted);font-size:13px}.tip b{color:var(--warn)}
+    .task{display:grid;grid-template-columns:1fr auto;gap:6px;padding:17px 0;border-top:1px solid #344157}.task:first-of-type{border-top:0}.task strong{font-size:14px;line-height:1.4}.task small{display:block;color:var(--muted);margin-top:5px}.badge{font:600 11px "JetBrains Mono",monospace;border:1px solid var(--line);border-radius:100px;padding:4px 9px;height:max-content}.badge.warning{color:var(--warn);border-color:#806b2f}.badge.good{color:var(--accent);border-color:#247f4d}.badge.fail{color:var(--danger);border-color:#9c4545}
+    .section-title{display:flex;align-items:end;justify-content:space-between;margin:36px 0 16px;gap:16px}.section-title h2{margin:0;font-size:23px;letter-spacing:-.035em}.section-title span{font-size:13px;color:var(--muted)}.workspace{background:var(--panel);border:1px solid #344157;border-radius:16px;overflow:hidden}.workspace-top{padding:20px 24px;display:flex;justify-content:space-between;align-items:start;gap:16px;border-bottom:1px solid #344157}.workspace-top h3{margin:4px 0 7px;font-size:18px}.workspace-top small{color:var(--muted)}.workspace-top .buttons{display:flex;gap:10px;align-items:center}.tabs{display:flex;gap:5px;border-bottom:1px solid #344157;padding:0 20px}.tab{background:transparent;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:14px 15px}.tab[aria-selected="true"]{color:var(--text);border-bottom-color:var(--accent)}.tab:hover{color:var(--text)}.tab-body{padding:26px;min-height:345px}.tab-body[hidden]{display:none}.progress{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:25px}.stage{border-top:3px solid var(--line);padding-top:10px;font-size:13px;color:var(--muted)}.stage.done{border-color:var(--accent);color:var(--text)}.stage.active{border-color:var(--warn);color:var(--text)}.timeline{display:grid;gap:16px}.line-item{display:grid;grid-template-columns:105px 1fr;gap:14px;font-size:14px}.time{font:12px "JetBrains Mono",monospace;color:var(--muted)}.line-item strong{display:block}.line-item p{color:var(--muted);margin:2px 0}.report{max-width:75ch}.report h4{font-size:19px;margin:0 0 8px}.report p{color:#e1e9f3}.report .caution{border-left:3px solid var(--warn);background:#302b24;padding:12px 16px;border-radius:4px;color:#fff0c4}.cite{border:0;background:#244b3f;color:#c5fbd5;border-radius:5px;padding:1px 6px;min-width:35px;min-height:30px}.source{padding:14px 0;border-top:1px solid #344157}.source:first-child{border-top:0}.source small{color:var(--muted);display:block}
+    .drawer{position:fixed;inset:0;z-index:10;background:#0009;display:flex;justify-content:end}.drawer[hidden]{display:none}.drawer-inner{width:min(440px,100%);height:100%;background:#1b2336;border-left:1px solid var(--line);padding:26px;overflow:auto;box-shadow:-15px 0 40px #0005}.drawer-head{display:flex;justify-content:space-between;align-items:center}.drawer h2{font-size:21px}.quote{border-left:3px solid var(--accent);padding:10px 15px;background:#152a2c;color:#e7f8ee}.drawer a{color:#a5eec0;overflow-wrap:anywhere}.preview-flag{position:fixed;bottom:14px;right:14px;background:#314056;color:#fff;border-radius:7px;padding:6px 10px;font-size:11px;box-shadow:0 2px 15px #0007}
+    @media(max-width:1050px){.hero{grid-template-columns:1fr}.hero-note{display:none}.layout{grid-template-columns:1fr}.shell{grid-template-columns:1fr}.nav{display:none}}@media(max-width:600px){main{padding:20px 16px 60px}.hero{padding:35px 0 22px}.panel{padding:19px}.workspace-top{flex-direction:column}.workspace-top .buttons{width:100%}.progress{grid-template-columns:repeat(3,1fr)}.line-item{grid-template-columns:70px 1fr}.form-row{align-items:stretch;flex-direction:column}.form-row .primary{width:100%}.top .env{white-space:normal}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+  <style>
+    /* B — Editorial: quiet paper, horizontal navigation, document-first reading. */
+    html[data-theme="editorial"]{color-scheme:light;--bg:#f3f0e8;--panel:#fffdf7;--raised:#e7e3d8;--line:#b8b0a3;--text:#23302c;--muted:#4d5c56;--accent:#2d7660;--warn:#9a6800;--danger:#af493c}
+    html[data-theme="editorial"] .shell{display:block}
+    html[data-theme="editorial"] .nav{height:72px;padding:13px clamp(20px,4vw,60px);display:flex;flex-direction:row;align-items:center;border-right:0;border-bottom:1px solid var(--line);gap:45px}
+    html[data-theme="editorial"] .nav>div:nth-child(2){display:flex;gap:3px}
+    html[data-theme="editorial"] .nav a{margin:0;padding:8px 12px;color:var(--muted)}
+    html[data-theme="editorial"] .nav-foot{display:none}
+    html[data-theme="editorial"] .brand{font-family:Georgia,"Noto Serif SC",serif;font-weight:700;letter-spacing:-.045em}
+    html[data-theme="editorial"] .brand b,html[data-theme="editorial"] .eyebrow{color:var(--accent)}
+    html[data-theme="editorial"] main{max-width:1340px}
+    html[data-theme="editorial"] .hero{padding-top:50px;border-bottom:1px solid var(--line);margin-bottom:26px}
+    html[data-theme="editorial"] .hero h1,html[data-theme="editorial"] .section-title h2,html[data-theme="editorial"] .report h4{font-family:Georgia,"Noto Serif SC",serif;font-weight:600;letter-spacing:-.035em}
+    html[data-theme="editorial"] .hero h1{font-size:clamp(38px,4.5vw,62px)}
+    html[data-theme="editorial"] .layout{grid-template-columns:minmax(0,1.25fr) minmax(310px,.85fr)}
+    html[data-theme="editorial"] .panel,html[data-theme="editorial"] .workspace{border-color:var(--line);border-radius:2px;box-shadow:0 8px 30px #4d463016}
+    html[data-theme="editorial"] .panel{background:var(--panel)}
+    html[data-theme="editorial"] textarea,html[data-theme="editorial"] .form-row input{background:#faf8f1;border-color:var(--line);color:var(--text)}
+    html[data-theme="editorial"] textarea::placeholder{color:#66766e}
+    html[data-theme="editorial"] .primary{background:var(--accent);color:white;border-radius:2px}
+    html[data-theme="editorial"] .primary:hover{background:#215d4c}
+    html[data-theme="editorial"] .secondary{border-color:var(--line);color:var(--text);border-radius:2px}
+    html[data-theme="editorial"] .workspace-top,html[data-theme="editorial"] .tabs,html[data-theme="editorial"] .task,html[data-theme="editorial"] .source{border-color:#d6d0c4}
+    html[data-theme="editorial"] .stage{border-color:#c5beb0}html[data-theme="editorial"] .stage.done{border-color:var(--accent)}html[data-theme="editorial"] .stage.active{border-color:var(--warn)}
+    html[data-theme="editorial"] .report p{color:#314039}html[data-theme="editorial"] .report .caution{background:#fff3da;color:#6e4e0e}
+    html[data-theme="editorial"] .cite{background:#deeee6;color:#245b49}
+    html[data-theme="editorial"] .drawer-inner{background:var(--panel)}html[data-theme="editorial"] .quote{background:#e8f1e9;color:#234b37}
+    html[data-theme="editorial"] .preview-flag{background:#315746}
+    /* C — Signal: compact command center with stronger rhythm and electric accents. */
+    html[data-theme="signal"]{--bg:#080f19;--panel:#101f2d;--raised:#173448;--line:#386276;--text:#eefaff;--muted:#acc7d1;--accent:#00d5bf;--warn:#ffb54f;--danger:#ff758c}
+    html[data-theme="signal"] .shell{grid-template-columns:176px minmax(0,1fr)}
+    html[data-theme="signal"] .nav{background:#0b1b29;padding:24px 12px}
+    html[data-theme="signal"] .brand{font-size:18px}
+    html[data-theme="signal"] main{max-width:1600px;padding-top:22px}
+    html[data-theme="signal"] .hero{padding:25px 0;grid-template-columns:minmax(0,1fr) 230px}
+    html[data-theme="signal"] .hero h1{font-size:clamp(30px,3vw,43px);max-width:650px}
+    html[data-theme="signal"] .layout{grid-template-columns:minmax(0,1fr) minmax(320px,1fr);gap:12px}
+    html[data-theme="signal"] .panel,html[data-theme="signal"] .workspace{border-radius:4px;border-color:var(--line);background:linear-gradient(135deg,#112838,#0f1e2d 72%)}
+    html[data-theme="signal"] .panel{padding:21px}
+    html[data-theme="signal"] .workspace-top{background:#122b3a}
+    html[data-theme="signal"] .primary{background:var(--accent);color:#002d2b;border-radius:4px}
+    html[data-theme="signal"] .secondary{border-color:var(--line);border-radius:4px}
+    html[data-theme="signal"] textarea,html[data-theme="signal"] .form-row input{background:#071825;border-color:var(--line)}
+    html[data-theme="signal"] .eyebrow{color:var(--accent)}
+    html[data-theme="signal"] .stage.done{border-color:var(--accent)}
+    html[data-theme="signal"] .tabs{background:#0c202e}
+    html[data-theme="signal"] .tab[aria-selected="true"]{border-color:var(--accent)}
+    html[data-theme="signal"] .report .caution{background:#3a2a1c;color:#ffe0aa}
+    html[data-theme="signal"] .cite{background:#075750;color:#dcfffa}
+    html[data-theme="signal"] .drawer-inner{background:#102531}html[data-theme="signal"] .quote{background:#153b3e;color:#e5fffb}
+    html[data-theme="signal"] .preview-flag{background:#075750}
+    @media(max-width:1050px){html[data-theme="editorial"] .nav{display:none}html[data-theme="editorial"] .layout,html[data-theme="signal"] .layout{grid-template-columns:1fr}html[data-theme="signal"] .shell{grid-template-columns:1fr}html[data-theme="signal"] .hero{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="nav" aria-label="主导航"><div class="brand">WEB<b>PILOT</b><span style="font-size:10px;vertical-align:top;margin-left:5px;color:#9bb5a6">LAB</span></div><div><a href="#new" class="current">调研工作台</a><a href="#recent">历史任务</a><a href="#detail">任务详情预览</a></div><div class="nav-foot">证据驱动的技术选型调研<br>DESIGN PREVIEW / 0.3</div></aside>
+    <main>
+      <div class="top"><span class="eyebrow">RESEARCH WORKSPACE / 01</span><span class="env"><span class="dot"></span>设计预览 · 尚未连接服务</span></div>
+      <header class="hero"><div><span class="eyebrow">TRACE EVERY CLAIM</span><h1>让每一个技术结论<br>都有据可查。</h1><p>输入选型问题，查看调研过程、来源与证据。信息不足会明确标记，帮助你判断哪些内容还需要核实。</p></div><div class="hero-note"><strong>从问题到证据</strong>规划问题 / 发现资料 / 采集页面 / 检查覆盖 / 生成报告</div></header>
+      <div class="layout">
+        <section class="panel" id="new"><h2>开始一项调研</h2><label class="label" for="question">你想比较什么？</label><textarea id="question" placeholder="例如：比较 Qdrant、Milvus 和 Weaviate 的许可证、部署方式与主要功能。"></textarea><div class="form-row"><label for="limit">最多采集来源<input id="limit" type="number" value="10" min="1" max="20"></label><button type="button" class="primary" id="demo">预览任务流程 →</button></div><div class="tip"><b>预览说明</b>：按钮只打开下方的示例任务。正式版会在本地配置 DeepSeek 和 Tavily Key 后创建真实任务。</div></section>
+        <section class="panel" id="recent"><div class="panel-head"><h2>最近任务</h2><span class="small">示例数据</span></div><div class="task"><div><strong>向量数据库技术选型</strong><small>今天 14:20 · 8/10 个来源已采集</small></div><span class="badge warning">部分结果</span></div><div class="task"><div><strong>Python Web 框架对比</strong><small>昨天 11:08 · 6/8 个来源已采集</small></div><span class="badge good">已完成</span></div><div class="task"><div><strong>消息队列部署方案</strong><small>11月6日 09:31 · 搜索服务超时</small></div><span class="badge fail">失败</span></div></section>
+      </div>
+      <div class="section-title"><h2>任务详情预览</h2><span>示例任务 · 不调用真实 API</span></div>
+      <section class="workspace" id="detail" aria-label="示例任务详情">
+        <div class="workspace-top"><div><span class="eyebrow">TASK / WP-2048</span><h3>向量数据库技术选型</h3><small>第 1 次执行 · 示例任务 · 2026-11-08 14:20</small></div><div class="buttons"><span class="badge warning">部分结果</span><button class="secondary" type="button" disabled title="设计预览中不可下载">下载报告</button></div></div>
+        <div class="tabs" role="tablist" aria-label="任务内容"><button class="tab" role="tab" aria-selected="true" aria-controls="pane-process" id="tab-process">执行过程</button><button class="tab" role="tab" aria-selected="false" aria-controls="pane-report" id="tab-report">调研报告</button><button class="tab" role="tab" aria-selected="false" aria-controls="pane-sources" id="tab-sources">来源 8</button></div>
+        <div class="tab-body" id="pane-process" role="tabpanel" aria-labelledby="tab-process"><div class="progress"><div class="stage done">01 / 规划</div><div class="stage done">02 / 搜索</div><div class="stage done">03 / 采集</div><div class="stage done">04 / 检查</div><div class="stage done">05 / 报告</div></div><div class="timeline"><div class="line-item"><span class="time">14:20:03</span><div><strong>任务已开始</strong><p>识别了许可证、部署方式和主要功能三个调研维度。</p></div></div><div class="line-item"><span class="time">14:20:18</span><div><strong>搜索完成</strong><p>发现官网文档、GitHub 仓库和技术文章；优先采集官方资料。</p></div></div><div class="line-item"><span class="time">14:21:46</span><div><strong>来源采集完成</strong><p>10 个候选来源中，8 个已采集，2 个无法读取。</p></div></div><div class="line-item"><span class="time">14:22:06</span><div><strong>证据检查</strong><p>部署方式存在信息缺口；报告将标记为部分结果。</p></div></div></div><p class="small" role="status" aria-live="polite">示例任务已结束。实际任务会在此显示最新阶段。</p></div>
+        <div class="tab-body" id="pane-report" role="tabpanel" aria-labelledby="tab-report" hidden><article class="report"><div class="caution">部分结果：部署方式仍需进一步核实。不要将本报告作为最终结论。</div><h4>向量数据库技术选型</h4><p>这份示例报告展示结论与证据如何关联。正式内容只会引用实际采集的网页片段。</p><h4>许可证</h4><p>示例结论：不同项目的开源许可需要以各自仓库中的 LICENSE 文件为准。<button class="cite" type="button" data-evidence="1" aria-label="查看示例证据 1">[1]</button></p><h4>部署方式</h4><p>现有示例资料不足以覆盖全部部署选项。请查看来源后进一步核实。</p><p class="small">生成时间：2026-11-08 14:22 · 数据为设计示例</p></article></div>
+        <div class="tab-body" id="pane-sources" role="tabpanel" aria-labelledby="tab-sources" hidden><div class="source"><strong>项目官方文档 · 示例来源</strong><small>已采集 · 2026-11-08 14:21 · 许可证维度</small></div><div class="source"><strong>GitHub 仓库 LICENSE · 示例来源</strong><small>已采集 · 2026-11-08 14:21 · 许可证维度</small></div><div class="source"><strong>部署指南 · 示例来源</strong><small>无法读取 · 页面暂时不可用</small></div><p class="small">这里只展示部分示例；正式版显示实际 URL、最终跳转地址和证据片段。</p></div>
+      </section>
+    </main>
+  </div>
+  <div class="drawer" id="drawer" hidden><div class="drawer-inner" role="dialog" aria-modal="true" aria-labelledby="drawer-title"><div class="drawer-head"><span class="eyebrow">EVIDENCE / 01</span><button type="button" class="secondary" id="close">关闭</button></div><h2 id="drawer-title">证据检查</h2><p class="small">设计示例 · 非真实网页内容</p><div class="quote">正式版将在此显示采集的原文片段，以及对应的来源标题和时间。</div><p>来源：GitHub 仓库 LICENSE（示例）</p><p class="small">采集时间：2026-11-08 14:21</p></div></div>
+  <div class="preview-flag">静态设计预览 · 示例数据</div>
+  <script>
+    const tabs=[...document.querySelectorAll('[role="tab"]')];const drawer=document.getElementById('drawer');let returnFocus=null;
+    function showTab(tab){tabs.forEach(item=>{const selected=item===tab;item.setAttribute('aria-selected',String(selected));document.getElementById(item.getAttribute('aria-controls')).hidden=!selected})}
+    tabs.forEach((tab,index)=>{tab.addEventListener('click',()=>showTab(tab));tab.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const next=tabs[(index+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];next.focus();showTab(next)}})});
+    document.getElementById('demo').addEventListener('click',()=>{showTab(document.getElementById('tab-process'));document.getElementById('detail').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})});
+    document.querySelectorAll('[data-evidence]').forEach(button=>button.addEventListener('click',()=>{returnFocus=button;drawer.hidden=false;document.getElementById('close').focus()}));
+    function closeDrawer(){drawer.hidden=true;returnFocus?.focus()};document.getElementById('close').addEventListener('click',closeDrawer);drawer.addEventListener('click',e=>{if(e.target===drawer)closeDrawer()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!drawer.hidden)closeDrawer()});
+  </script>
+</body>
+</html>

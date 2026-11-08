@@ -9,6 +9,7 @@ WebPilot 是面向开源技术选型的浏览器调研助手。用户提交调�
 3. [接口文档](./api.md)：HTTP API、事件流、数据结构和错误约定。
 4. [Agent 协议](./agent-contracts.md)：各 Agent 的结构化输入输出、校验与引用生成。
 5. [开发与评测计划](./delivery.md)：里程碑、测试数据、评测口径与交付标准。
+6. [前端页面设计](./frontend-design.md) 与 [三套模板预览](./frontend-options.html)：页面、状态、视觉方向和可本地打开的交互示例。
 
 ## 阅读约定
 
