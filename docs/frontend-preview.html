@@ -67,6 +67,12 @@
     html[data-theme="signal"] .cite{background:#075750;color:#dcfffa}
     html[data-theme="signal"] .drawer-inner{background:#102531}html[data-theme="signal"] .quote{background:#153b3e;color:#e5fffb}
     html[data-theme="signal"] .preview-flag{background:#075750}
+    .theme-switch{position:fixed;left:16px;bottom:14px;z-index:20;display:flex;align-items:center;gap:5px;padding:6px;background:#07101ce8;border:1px solid #7990a2;border-radius:10px;box-shadow:0 6px 28px #0008}
+    .theme-switch span{color:#d7e8f0;font:12px "Microsoft YaHei",sans-serif;padding:0 8px}
+    .theme-switch button{border:1px solid transparent;background:#314458;color:#f7f7f7;border-radius:6px;padding:7px 10px;min-height:36px;min-width:36px;font:700 12px "Microsoft YaHei",sans-serif}
+    .theme-switch button[aria-pressed="true"]{background:#22c55e;color:#052013}
+    .theme-switch button:hover{border-color:#fff}
+    @media(max-width:600px){.theme-switch{right:16px;left:16px;justify-content:center}.preview-flag{display:none}}
     @media(max-width:1050px){html[data-theme="editorial"] .nav{display:none}html[data-theme="editorial"] .layout,html[data-theme="signal"] .layout{grid-template-columns:1fr}html[data-theme="signal"] .shell{grid-template-columns:1fr}html[data-theme="signal"] .hero{grid-template-columns:1fr}}
   </style>
 </head>
@@ -91,6 +97,7 @@
     </main>
   </div>
   <div class="drawer" id="drawer" hidden><div class="drawer-inner" role="dialog" aria-modal="true" aria-labelledby="drawer-title"><div class="drawer-head"><span class="eyebrow">EVIDENCE / 01</span><button type="button" class="secondary" id="close">关闭</button></div><h2 id="drawer-title">证据检查</h2><p class="small">设计示例 · 非真实网页内容</p><div class="quote">正式版将在此显示采集的原文片段，以及对应的来源标题和时间。</div><p>来源：GitHub 仓库 LICENSE（示例）</p><p class="small">采集时间：2026-11-08 14:21</p></div></div>
+  <nav class="theme-switch" aria-label="模板切换"><span>切换模板</span><button type="button" data-theme-choice="console" aria-pressed="true" title="A 深色调研控制台">A</button><button type="button" data-theme-choice="editorial" aria-pressed="false" title="B 文献式调研桌面">B</button><button type="button" data-theme-choice="signal" aria-pressed="false" title="C 实时任务指挥台">C</button></nav>
   <div class="preview-flag">静态设计预览 · 示例数据</div>
   <script>
     const tabs=[...document.querySelectorAll('[role="tab"]')];const drawer=document.getElementById('drawer');let returnFocus=null;
@@ -99,6 +106,8 @@
     document.getElementById('demo').addEventListener('click',()=>{showTab(document.getElementById('tab-process'));document.getElementById('detail').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})});
     document.querySelectorAll('[data-evidence]').forEach(button=>button.addEventListener('click',()=>{returnFocus=button;drawer.hidden=false;document.getElementById('close').focus()}));
     function closeDrawer(){drawer.hidden=true;returnFocus?.focus()};document.getElementById('close').addEventListener('click',closeDrawer);drawer.addEventListener('click',e=>{if(e.target===drawer)closeDrawer()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!drawer.hidden)closeDrawer()});
+    const themeButtons=[...document.querySelectorAll('[data-theme-choice]')];function chooseTheme(theme){document.documentElement.dataset.theme=theme;themeButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.themeChoice===theme)))}
+    themeButtons.forEach(button=>button.addEventListener('click',()=>chooseTheme(button.dataset.themeChoice)));chooseTheme(['console','editorial','signal'].includes(document.documentElement.dataset.theme)?document.documentElement.dataset.theme:'console');
   </script>
 </body>
 </html>

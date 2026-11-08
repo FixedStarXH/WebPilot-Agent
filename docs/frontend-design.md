@@ -4,7 +4,7 @@
 
 ## 1. 产品定位与视觉方向
 
-**定位：调研工作台。** 视觉重点是让用户看清“任务正在做什么、结论依据是什么、哪里仍不确定”。目前提供三套可选模板：[A 深色调研控制台](./frontend-preview.html?theme=console)、[B 文献式调研桌面](./frontend-preview.html?theme=editorial)、[C 实时任务指挥台](./frontend-preview.html?theme=signal)；可以从[对比页](./frontend-options.html)打开。下方颜色 token 和布局细节以 A 为基线，选定方向后再更新为最终设计系统。
+**定位：调研工作台。** 视觉重点是让用户看清“任务正在做什么、结论依据是什么、哪里仍不确定”。[同一个预览页](./frontend-preview.html)左下角可以直接切换 A 深色调研控制台、B 文献式调研桌面、C 实时任务指挥台；也可以从[对比页](./frontend-options.html)打开。下方颜色 token 和布局细节以 A 为基线，选定方向后再更新为最终设计系统。
 
 参考的设计指导来自本地 `ui-ux-pro-max` skill：任务过程要有阶段反馈，异步更新提供一处有意义的状态播报，表单错误就近展示并可通过键盘定位；深色界面需满足文字对比度和可见焦点。该 skill 的自动整体布局建议偏 FAQ，未采用其 FAQ 导航结构。
 
