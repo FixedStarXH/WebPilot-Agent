@@ -1,0 +1,1 @@
+"""WebPilot application."""
